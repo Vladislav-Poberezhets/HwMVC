@@ -1,0 +1,25 @@
+﻿@model HwMVC.Products.Product
+@{
+    ViewData["Tittle"] = $"Edit {Model.ProductName  }";
+}
+
+<div class="col-md-6 m-auto">
+    <form asp-controller="Home" asp-action="EditProduct">
+        <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input asp-for="Id" class="form-control" />
+        </div>
+    <div class="mb-3">
+            <label class="form-label">ProductName</label>
+            <input asp-for="ProductName" class="form-control" />
+        </div>
+     <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input asp-for="Price" class="form-control" />
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">Edit Product</button>
+        </div>
+</form>
+</div>
+
