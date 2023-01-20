@@ -49,7 +49,7 @@ namespace WebApplication3.Controllers
 
 
 
-        public async Task<ActionResult> DeleteProduct(Product product)
+        /*public async Task<ActionResult> DeleteProduct(Product product)
         {
             if (product != null)
             {
@@ -59,7 +59,7 @@ namespace WebApplication3.Controllers
 
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
+        }*/
 
         public IActionResult Privacy()
         {
