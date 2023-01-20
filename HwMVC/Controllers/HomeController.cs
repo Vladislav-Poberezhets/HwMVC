@@ -37,6 +37,8 @@ namespace WebApplication3.Controllers
         {
             return View("CreateProduct");
         }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateProduct(Product product)
         {
@@ -44,6 +46,21 @@ namespace WebApplication3.Controllers
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+
+        public async Task<ActionResult> DeleteProduct(Product product)
+        {
+            if (product != null)
+            {
+                _dbContext.Products.Remove(product);
+                
+            }
+
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();

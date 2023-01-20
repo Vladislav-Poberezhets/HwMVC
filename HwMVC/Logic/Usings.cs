@@ -8,6 +8,6 @@ global using System.Text.Json;
 global using HwMVC.Models;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Diagnostics;
-global using HwMVC.Models;
+
 
 
