@@ -1,10 +1,9 @@
-﻿@model HwMVC.Products.Product
+﻿@model Product
 @{
-    ViewData["Tittle"] = $"Edit {Model.ProductName  }";
+    ViewData["Tittle"] = $"Creation product";
 }
-
 <div class="col-md-6 m-auto">
-    <form asp-controller="Home" asp-action="EditProduct">
+    <form asp-controller="Home" asp-action="CreateProduct">
     <div class="mb-3">
             <label class="form-label">ProductName</label>
             <input asp-for="ProductName" class="form-control" />
@@ -14,8 +13,7 @@
             <input asp-for="Price" class="form-control" />
         </div>
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">Edit Product</button>
+            <button class="btn btn-primary" type="submit">Create Product</button>
         </div>
 </form>
 </div>
-

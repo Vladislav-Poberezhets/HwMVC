@@ -1,8 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using HwMVC.Data;
-using HwMVC.Products;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -22,7 +17,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

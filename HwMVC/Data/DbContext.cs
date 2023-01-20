@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace HwMVC.Products
+﻿namespace HwMVC.Products
 {
     public class ApplicationContext : DbContext
     {
