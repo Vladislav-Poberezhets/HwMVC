@@ -1,10 +1,4 @@
-﻿using HwMVC.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using HwMVC.Models;
-using HwMVC.Products;
-
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication3.Controllers
 {
@@ -37,6 +31,19 @@ namespace WebApplication3.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> CreateProduct()
+        {
+            return View("CreateProduct");
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(Product product)
+        {
+            _dbContext.Entry(product).State = EntityState.Added;
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
         public IActionResult Privacy()
         {
             return View();

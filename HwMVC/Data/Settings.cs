@@ -1,8 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-
-namespace HwMVC.Data
+﻿namespace HwMVC.Data
 {
     public static class Settings
     {
