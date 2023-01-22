@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace WebApplication3.Controllers
 {
@@ -6,16 +9,45 @@ namespace WebApplication3.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationContext _dbContext;
-
+        public List<UserLogin> MockUsers = new()
+        {
+            new UserLogin(){Id = 1,Name = "Admin1",Password = "admin1"},
+            new UserLogin(){Id = 2,Name = "Admin2",Password= "admin2"}
+        };
+ 
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
             _dbContext = context;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<List<Product>>> Index() =>
             View(await _dbContext.Products.ToListAsync());
+
+        public ActionResult Login() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Login(UserLogin login)
+        {
+            var dbUser = MockUsers
+                .FirstOrDefault(u=>u.Name == login.Name &&
+                u.Password == login.Password);
+            if (dbUser is not null)                
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(new ClaimsIdentity(
+                        new List<Claim>
+                        {
+                            new(ClaimsIdentity.DefaultNameClaimType, dbUser.Name)                         
+                        },
+                        "applicationCookie",
+                        ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType))
+                    );
+            return RedirectToAction("Index");
+        }
+
+
 
         [HttpGet]
         public async Task<ActionResult<Product>> EditProduct(int id) =>
@@ -46,21 +78,6 @@ namespace WebApplication3.Controllers
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-
-
-        /*public async Task<ActionResult> DeleteProduct(Product product)
-        {
-            if (product != null)
-            {
-                _dbContext.Products.Remove(product);
-                
-            }
-
-            await _dbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }*/
-
         public IActionResult Privacy()
         {
             return View();
