@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+<img src="img/firefox.jpg" asp-append-version = "true"/>
 <div class="text-center">   
             <h1 class="display-4">Welcome @User.Identity?.Name</h1>
     @if (User.Identity is { IsAuthenticated: true })
@@ -41,7 +42,7 @@
                                                Edit
                                         </a>
                             }
-                            
+                </td>                          
     </tr>
           }
   </tbody>
